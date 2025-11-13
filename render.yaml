@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: flask-hotspot1
+    env: python
+    plan: free
+    buildCommand: |
+      pip install --upgrade pip
+      pip install --no-cache-dir -r requirements.txt
+    startCommand: gunicorn app:app
