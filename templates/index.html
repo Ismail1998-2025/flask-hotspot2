@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | Hotspot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>تسجيل الدخول إلى الهوتسبوت</h2>
+    <form id="loginForm">
+      <label for="username">اسم المستخدم</label>
+      <input id="username" name="username" type="text" placeholder="أدخل اسم المستخدم" required>
+
+      <label for="password">كلمة المرور</label>
+      <input id="password" name="password" type="password" placeholder="أدخل كلمة المرور" required>
+
+      <button type="submit">تسجيل الدخول</button>
+      <p id="result"></p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        body: formData
+      });
+      const result = await response.json();
+      document.getElementById("result").innerText = result.message;
+    });
+  </script>
+</body>
+</html>
